@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:MauiAppEventos.Behaviors"
+             x:Class="MauiAppEventos.Views.CadastroEvento"
+             Title="CadastroEvento"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray100}">
+    
+    <VerticalStackLayout VerticalOptions="CenterAndExpand"
+                         Padding="10"
+                         Spacing="10">
+        
+        <Label Text="Cadastro de Eventos"
+               HorizontalTextAlignment="Center"
+               FontAttributes="Italic"
+               FontSize="30"
+               TextColor="{StaticResource Primary}"
+               />
+
+        <Frame Padding="10">
+            <VerticalStackLayout Spacing="10">
+                <!-- Nome do Evento -->
+                <Label Text="Nome:" />
+                <Entry x:Name="Nome" 
+                       Placeholder="Informe o Nome do Evento"
+                       Keyboard="Text">
+                    <Entry.Behaviors>
+                        <behaviors:TitleCaseBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <!-- Datas -->
+                <Label Text="Período:" />
+                
+                <HorizontalStackLayout Spacing="30" HorizontalOptions="CenterAndExpand">                    
+
+                    <Grid RowDefinitions="Auto, Auto"
+                          ColumnDefinitions="*, *"
+                          ColumnSpacing="30">
+                        
+                        <!-- Data de Início -->
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Data Inicio:" />
+                        
+                        <DatePicker Grid.Row="1"
+                                    Grid.Column="0"
+                                    x:Name="DataInicio"
+                                    Format="dd/MM/yyyy" />
+                        
+                        <!-- Data de Término -->
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               Text="Data Término:" />
+
+                        <DatePicker Grid.Row="1"
+                                    Grid.Column="1"
+                                    x:Name="DataTermino"
+                                    Format="dd/MM/yyyy" />
+
+                    </Grid>
+
+                </HorizontalStackLayout>                
+
+                <!-- Número de Participantes -->
+                <Grid RowDefinitions="Auto, Auto"
+                      ColumnDefinitions="*, *, *">
+
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Participantes:" />
+                    
+                    <Label Grid.Row="0" Grid.Column="1"
+                           TextColor="{StaticResource Primary}"
+                           Text="{Binding Value}"
+                           BindingContext="{x:Reference Participantes}"/>
+
+                    <Stepper Grid.Row="0" Grid.Column="2"
+                             x:Name="Participantes"
+                             Minimum="1"
+                             Maximum="9999"
+                             Increment="1" />
+
+                </Grid>
+                
+                <!-- Local do Evento -->
+                <Label Text="Local:" />
+                <Entry x:Name="Local"
+                       Placeholder="Informe o Local do Evento"
+                       Keyboard="Text">
+                    <Entry.Behaviors>
+                        <behaviors:TitleCaseBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <!-- Custo por Participante -->
+                <Label Text="Valor por Participante:" />
+                <Entry Placeholder="R$ 0,00"
+                       Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <behaviors:CurrencyBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <!-- 1. Utilize o BindingContext para associar os dados do evento
+                a uma model de classe Evento.
+                Essa model deve incluir as propriedades mencionadas, além de uma
+                lógica que calcule a duração do evento em dias e o custo total
+                do evento com base no número de participantes.-->
+
+                <!-- 2. Use a classe DateTime para calcular a duração do evento
+                e a classe TimeSpan para exibir essa diferença no aplicativo. -->
+
+                <!-- 3. O projeto deve permitir que, ao completar o cadastro,
+                os dados sejam apresentados em uma nova página, mostrando o
+                resumo do evento com todas as informações formatadas corretamente
+                e o custo total calculado. -->
+
+                <Button Text="Cadastrar" Margin="20" />
+
+            </VerticalStackLayout>            
+            
+        </Frame>
+        
+    </VerticalStackLayout>
+    
+</ContentPage>
+    
